@@ -38,9 +38,9 @@ const LoginPage: FC<LoginPageProps> = ({}) => {
       .post("/api/auth/login", values)
       .then((res) => {
         toast.success(res.data.message || "Login successful");
-        return res.status;
         router.push("/");
         router.refresh();
+        return res.status;
       })
       .catch((err) => {
         toast.error(err.response.data.message);
