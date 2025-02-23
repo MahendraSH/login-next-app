@@ -11,7 +11,7 @@ interface NavbarProps {}
 
 const getAdmin = async () => {
   try {
-    const response = await authAxios.post("/api/auth/admin");
+    const response = await authAxios.get("/api/auth/admin");
     return response.data;
   } catch (error) {
     console.error("Error fetching admin data:", error);
@@ -27,9 +27,9 @@ const getUser = async () => {
     return null;
   }
 };
-const Navbar: FC<NavbarProps> = async ({}) => {
+const Navbar = async ({}: NavbarProps) => {
   const user = await getUser();
-  const admin = await getAdmin();
+  const admin = (await getAdmin()) || null;
 
   return (
     <nav className=" flex w-full min-h-16  shadow-sm shadow-secondary-foreground">
@@ -81,7 +81,7 @@ const Navbar: FC<NavbarProps> = async ({}) => {
               </Link>
             </>
           )}
-          {admin && (
+          {admin && admin.isAdmin && (
             <Link
               className={cn({
                 buttonVariants: {

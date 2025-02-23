@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 import Roles from "./constants/Roles";
 export async function middleware(request: NextRequest) {
-  const token = cookies().get("token");
+  const token = (await cookies()).get("token");
   const siteUrl = new URL(request.url).origin;
   const authAxios = axios.create({
     headers: {

@@ -18,6 +18,7 @@ export const POST = async (req: NextRequest) => {
       status: 400,
     });
   }
+  console.log(user.dataValues.password);
   const isPasswordValid = await verifyPassword(
     result.data.password,
     user.password

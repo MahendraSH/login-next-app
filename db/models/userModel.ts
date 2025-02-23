@@ -19,11 +19,11 @@ class UserModel
   extends Model<UserAttributes, UserCreationAttributes>
   implements UserAttributes
 {
-  public id!: number;
-  public name!: string;
-  public email!: string;
-  public password!: string;
-  public role!: Roles; //
+  declare id: number;
+  declare name: string;
+  declare email: string;
+  declare password: string;
+  declare role: Roles;
 }
 
 UserModel.init(
