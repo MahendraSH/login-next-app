@@ -9,12 +9,12 @@ import { BoxIcon } from "lucide-react";
 
 interface NavbarProps {}
 
-const getAdmin = async () => {
+const isAdmin = async () => {
   try {
-    const response = await authAxios.post("/api/auth/admin");
+    const response = await authAxios.get("/api/auth/admin");
     return response.data;
   } catch (error) {
-    console.error("Error fetching admin data:", error);
+    console.error("Error fetching is admin:", error);
     return null;
   }
 };
@@ -27,9 +27,20 @@ const getUser = async () => {
     return null;
   }
 };
-const Navbar: FC<NavbarProps> = async ({}) => {
-  const user = await getUser();
-  const admin = await getAdmin();
+const isAuth = async () => {
+  try {
+    const response = await authAxios.get("/api/auth/is-auth");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    return null;
+  }
+};
+const Navbar = async ({}: NavbarProps) => {
+  const auth = await isAuth();
+  const isAuthenticated = auth?.isAuth;
+  const user = isAuthenticated ? await getUser() : null;
+  const admin = isAuthenticated ? await isAdmin() : null;
 
   return (
     <nav className=" flex w-full min-h-16  shadow-sm shadow-secondary-foreground">

@@ -11,21 +11,21 @@ export async function middleware(request: NextRequest) {
     },
   });
   const userResponse = await authAxios
-    .get(siteUrl + "/api/auth/user")
+    .get(siteUrl + "/api/auth/is-auth")
     .then((res) => res.data)
     .catch(() => null);
 
-  if (!userResponse) {
+  if (!userResponse || userResponse.isAuth === false) {
     return NextResponse.redirect(new URL("auth/login", request.url));
   }
 
   if (request.nextUrl.pathname.startsWith("/admin")) {
     const adminResponse = await authAxios
-      .post(siteUrl + "/api/auth/admin")
+      .get(siteUrl + "/api/auth/admin")
       .then((res) => res.data)
       .catch(() => null);
 
-    if (!adminResponse) {
+    if (!adminResponse || adminResponse.isAdmin === false) {
       return NextResponse.redirect(new URL("/", request.url));
     }
   }
