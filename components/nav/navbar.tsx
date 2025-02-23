@@ -4,6 +4,7 @@ import { FC } from "react";
 import { buttonVariants } from "@/components/ui/button";
 import authAxios from "@/lib/authAxios";
 import axios from "axios";
+import LogoutButton from "./logout-button";
 
 interface NavbarProps {}
 
@@ -56,16 +57,7 @@ const Navbar: FC<NavbarProps> = async ({}) => {
               >
                 {user.name}
               </Link>
-              <Link
-                className={cn({
-                  buttonVariants: {
-                    variant: "link",
-                  },
-                })}
-                href="/auth/logout"
-              >
-                Logout
-              </Link>
+              <LogoutButton />
             </>
           ) : (
             <>
