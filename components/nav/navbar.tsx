@@ -5,6 +5,7 @@ import { buttonVariants } from "@/components/ui/button";
 import authAxios from "@/lib/authAxios";
 import axios from "axios";
 import LogoutButton from "./logout-button";
+import { BoxIcon } from "lucide-react";
 
 interface NavbarProps {}
 
@@ -34,14 +35,11 @@ const Navbar: FC<NavbarProps> = async ({}) => {
     <nav className=" flex w-full min-h-16  shadow-sm shadow-secondary-foreground">
       <div className="flex flex-1 items-center justify-between px-4">
         <div className="flex items-center space-x-2">
-          <Link href="/">
-            <img
-              src="https://nextjs.org/icons/next.svg"
-              alt="Next.js Logo"
-              width={50}
-              height={50}
-              className="dark:invert"
-            />
+          <Link
+            href="/"
+            className="flex items-center space-x-2 font-semibold text-xl"
+          >
+            <BoxIcon className="w-8 h-8" /> Logo
           </Link>
         </div>
         <div className="flex items-center space-x-5">
@@ -55,7 +53,7 @@ const Navbar: FC<NavbarProps> = async ({}) => {
                 })}
                 href="/dashboard"
               >
-                {user.name}
+                Dashboard
               </Link>
               <LogoutButton />
             </>
